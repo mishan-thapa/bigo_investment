@@ -1,0 +1,150 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<div class="row mb-3"></div>
+<div class="container">
+
+<div class="row">
+    <div class="p-3 mb-2 bg-primary text-white"><h2>Technical Screener</h2></div>
+</div>
+<form class="form-group " id="forr">
+    <!-- 1st row start -->
+    <div class="row">
+        <div class="col-lg-4" id="market_cap"><h3> RSI</h3></div>
+        <div class="col-lg-4" id="book_value"><h3> MACD</h3></div>
+            <div class="col-lg-4" id="book_value"><h3> Bollinger Band®</h3></div>    
+            </div>
+            
+            <div class="row">
+                <!-- 1st colume start -->
+                <div class="col-lg-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault1" onclick="funda_radio(1)" checked>
+                        <label class="form-check-label" for="flexRadioDefault1">
+                          defined Range
+                        </label>
+                      </div>
+                      <select class="form-control form-control" id="bv_defined">
+                        <option>any</option>
+                        <option>below 30</option>
+                        <option>30-70</option>
+                        <option>above 70</option>
+                      </select>
+                      
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault1" id="flexRadioDefault2" onclick="funda_radio(2)" >
+                        <label class="form-check-label" for="flexRadioDefault2">
+                          Own Range
+                        </label>
+                      </div>
+                      <div class="input-group d-print-block" id="ownn" >
+                          <div class="col-lg-6">
+                            <input class="input--style-4" type="text" placeholder="min" aria-label="Search" name="searched" id="bv_min_id">
+                          </div>
+                          <div class="col-lg-6">
+                            <input class="input--style-4" type="text" placeholder="max" aria-label="Search" name="searched" id="bv_max_id">
+                          </div>
+                      </div>
+                    
+                </div>
+
+                <!-- 1st col end -->
+
+                <!-- 2nd colume start -->
+                <div class="col-lg-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault3" onclick="funda_radio(3)" checked>
+                        <label class="form-check-label" for="flexRadioDefault3">
+                          defined Range
+                        </label>
+                      </div>
+                      <select class="form-control form-control" id="eps_defined">
+                        <option>any</option>
+                        <option>below 30</option>
+                        <option>30-70</option>
+                        <option>above 70</option>
+                      </select>
+                      
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault4" onclick="funda_radio(4)" >
+                        <label class="form-check-label" for="flexRadioDefault4">
+                          Own Range
+                        </label>
+                      </div>
+                      <div class="input-group d-print-block" id="ownn" >
+                        <div class="col-lg-6">
+                          <input class="input--style-4" type="text" placeholder="min" aria-label="Search" name="searched" id="eps_min_id">
+                        </div>
+                        <div class="col-lg-6">
+                          <input class="input--style-4" type="text" placeholder="max" aria-label="Search" name="searched" id="eps_max_id">
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <!-- 2nd col end -->
+                
+
+                <!-- 3rd colume start -->
+                <div class="col-lg-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault3" id="flexRadioDefault5" onclick="funda_radio(5)" checked>
+                        <label class="form-check-label" for="flexRadioDefault5">
+                          defined Range
+                        </label>
+                      </div>
+                      <select class="form-control form-control" id="mc_defined">
+                        <option>any</option>
+                        <option>below 30</option>
+                        <option>30-70</option>
+                        <option>above 70</option>
+                      </select>
+                      
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault3" id="flexRadioDefault6" onclick="funda_radio(6)" >
+                        <label class="form-check-label" for="flexRadioDefault6">
+                          Own Range
+                        </label>
+                      </div>
+                      <div class="input-group d-print-block" id="ownn" >
+                        <div class="col-lg-6">
+                          <input class="input--style-4" type="text" placeholder="min" aria-label="Search" name="searched" id="mc_min_id">
+                        </div>
+                        <div class="col-lg-6">
+                          <input class="input--style-4" type="text" placeholder="max" aria-label="Search" name="searched" id="mc_max_id">
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <!-- 3rd col end -->
+                
+
+            </div>
+      
+      <!-- 1st row ending -->
+
+      <div class="row mb-3"></div>
+
+
+
+
+
+</form>
+<div class="row mb-3"></div>
+<div class="row mb-3"></div>
+
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="p-3 mb-2 bg-secondary text-white"><h2>Search Result</h2></div>
+    </div>
+</div>
+{%  endblock %}
