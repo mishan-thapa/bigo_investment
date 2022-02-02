@@ -25,6 +25,11 @@ urlpatterns = [
      path('search', views.search,name='search'),
      path('technical_screener.html', views.technical_screener,name='technical_screener'),
      path('fundamental_screener.html', views.fundamental_screener,name='fundamental_screener'),
+     path('fundamental_screener_search', views.fundamental_screener_search,name='fundamental_screener_search'),
+    path('comparator.html', views.comparator,name='comparator'),
+    path('forecast.html', views.forecast,name='forecast'),
+    path('forecast_search/', views.forecast_search,name='forecast_search'),
+
 
 
 

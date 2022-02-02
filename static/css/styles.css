@@ -25,7 +25,15 @@ input{
     visibility: hidden;
 }
 
+#bv_defined_id{
+    visibility:visible;
+}
+
 /* for the div container of the table */
-#ff_search{
+/* #ff_search{
     background-color:darkgreen;
+} */
+
+#comparator_container{
+    text-align: center;
 }
