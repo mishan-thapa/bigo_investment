@@ -44,3 +44,12 @@ class a(models.Model):
 
     def __str__(self):
       return self.date
+
+class technical1(models.Model):
+    companies = models.TextField()
+    rsi = models.FloatField(max_length=20)
+    macd = models.TextField()
+    bollingerband = models.TextField()
+
+    def __str__(self):
+      return self.companies

@@ -3,6 +3,7 @@ from pickle import TRUE
 from django.contrib import admin
 #from calc.models import TSLA
 from calc.models import fundamental
+from calc.models import technical1
 from calc.models import a
 #from calc.models import fundamental1
 
@@ -11,6 +12,7 @@ from django.shortcuts import render
 from django import forms
 #from .models import TSLA
 from .models import fundamental
+from .models import technical1
 from .models import a
 #from .models import fundamental1
 from django.contrib import messages
@@ -132,6 +134,56 @@ class fundamentalAdmin(admin.ModelAdmin):
         return render(request, "admin/csv_upload.html", data)
 
 admin.site.register(fundamental, fundamentalAdmin)
+
+
+# yo chai technical ko data halna hai 
+class technical1Admin(admin.ModelAdmin):
+    list_display3 = ('companies','rsi','macd','bollingerband')
+
+    def get_urls(self):
+        urls = super().get_urls()
+        new_urls = [path('upload-csv/', self.upload_csv),]
+        return new_urls + urls
+
+    def upload_csv(self, request):
+
+        if request.method == "POST":
+            csv_file = request.FILES["csv_upload"]
+            
+            if not csv_file.name.endswith('.csv'):
+                messages.warning(request, 'The wrong file type was uploaded')
+                return HttpResponseRedirect(request.path_info)
+            
+            file_data = csv_file.read().decode("utf-8")
+            csv_data = file_data.split("\n")
+            #next(csv_data,None)
+            #print(csv_data.len())
+            skip_first =True
+            for x in csv_data:
+                if skip_first==True :
+                    skip_first=False
+                    continue
+                fields = x.split(",")
+                print('mishan')
+                
+                
+                try:
+                    created = technical1.objects.update_or_create(
+                    companies = fields[0],
+                    rsi = fields[1],
+                    macd = fields[2],
+                    bollingerband =fields[3],
+                    )
+                except:
+                    pass
+            url = reverse('admin:index')
+            return HttpResponseRedirect(url)
+
+        form = CsvImportForm()
+        data = {"form": form}
+        return render(request, "admin/csv_upload.html", data)
+
+admin.site.register(technical1,technical1Admin)
 
 # for a company ko lagi hai
 class aAdmin(admin.ModelAdmin):

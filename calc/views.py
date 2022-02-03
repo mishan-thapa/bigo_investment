@@ -4,6 +4,7 @@ from django.http import HttpResponse
 #from calc.models import TSLA
 from calc.models import fundamental
 from calc.models import a
+from calc.models import technical1
 import pandas as pd
 
 
@@ -18,6 +19,12 @@ def market(request):
 def forecast(request):
     forecast_query= fundamental.objects.all()
     return render(request,'forecast.html',{'forecast_query':forecast_query})
+
+def comparator_comp1_search(request):
+    if request.method == "POST":
+        fs= request.POST.get('comparator_comp1_search_name')
+        comparator_comp1_search_query=fundamental.objects.all().filter(companies=fs)
+        return render(request,'comparator.html',{'comparator_comp1_search_query':comparator_comp1_search_query})
 
 def technical_screener(request):
     return render(request,'technical_screener.html')
@@ -35,9 +42,7 @@ def forecast_search(request):
         fs= request.POST.get('forecast_close_search')
         print(fs)
         fsq= a.objects.all() 
-        df = pd.DataFrame(list(a.objects.all().values())) 
-        print(df) 
-        return render(request,'forecast.html',{'fsq':fsq,'forecast_query':forecast_query})
+        return render(request,'forecast.html',{'fsq':fsq})
         
         
         
@@ -53,6 +58,35 @@ def search(request):
     #         return render(request,'pcbl.html')
     # elif request.GET['searched']=="AA":
     #     return render(request,'AA.html')
+
+
+# for technical screnner hai
+def technical_screener_search(request):
+    if request.method == "POST":
+        rsi_min =request.POST.get('rsi_min_search')
+        rsi_max =request.POST.get('rsi_max_search')
+        rsi_def =request.POST.get('rsi_defined_search')
+        macd_def =request.POST.get('macd_defined_search')
+        bbs_def =request.POST.get('bbs_defined_search')
+        technical1_query= technical1.objects.all()
+        if macd_def !='' and macd_def is not None:
+            technical1_query= technical1_query.filter(macd= macd_def)
+        if bbs_def !='' and bbs_def is not None:
+            technical1_query= technical1_query.filter(bollingerband = bbs_def)
+        if rsi_min !='' and rsi_min is not None:
+            technical1_query= technical1_query.filter(rsi__gte= rsi_min)
+        if rsi_max !='' and rsi_max is not None:
+            technical1_query= technical1_query.filter(rsi__lte= rsi_max)
+        if rsi_def !='' and rsi_def is not None:
+            if rsi_def == 1:
+                technical1_query= technical1_query.filter(rsi__lte= 30)
+            elif rsi_def == 2 :
+                technical1_query= technical1_query.filter(rsi__lte= 70)
+                technical1_query= technical1_query.filter(rsi__gte= 30)
+            else :
+                technical1_query= technical1_query.filter(rsi__gte= 70)
+        
+        return render(request,'technical_screener.html',{'tq':technical1_query})
 
 
 def fundamental_screener_search(request):

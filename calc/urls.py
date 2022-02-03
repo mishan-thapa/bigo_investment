@@ -28,7 +28,11 @@ urlpatterns = [
      path('fundamental_screener_search', views.fundamental_screener_search,name='fundamental_screener_search'),
     path('comparator.html', views.comparator,name='comparator'),
     path('forecast.html', views.forecast,name='forecast'),
-    path('forecast_search/', views.forecast_search,name='forecast_search'),
+    path('forecast_search', views.forecast_search,name='forecast_search'),
+    path('comparator_comp1_search', views.comparator_comp1_search,name='comparator_comp1_search'),
+    path('comparator_comp1_search', views.comparator_comp1_search,name='comparator_comp1_search'),
+    path('technical_screener_search', views.technical_screener_search,name='technical_screener_search'),
+    
 
 
 

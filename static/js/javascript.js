@@ -92,6 +92,16 @@ function funda_radio(x){
             de="roe_defined";
             mn="roe_min_id";
             mx="roe_max_id";
+            break;
+        case 19:
+            de="rsi_defined_id";
+            mn="rsi_min_id";
+            mx="rsi_max_id";
+            break;
+        case 20:
+            de="rsi_defined_id";
+            mn="rsi_min_id";
+            mx="rsi_max_id";
             break;}
     if(x%2==0){
         document.getElementById(mx).style.visibility="visible";

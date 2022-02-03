@@ -39,10 +39,10 @@
     <div class="grid-item"></div>
 
     <div class="grid-item"> 
-       <form action="forecast_search/" method="POST">
+       <form action="forecast_search" method="POST">
         {% csrf_token %}
         <input type="text" placeholder="Search Stock" name="forecast_close_search">
-        <input type="submit">
+        <button type="submit" class="btn btn-dark"> search</button>
        </form>
     </div>
 

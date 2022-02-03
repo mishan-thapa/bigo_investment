@@ -10,6 +10,10 @@
     text-align:center;
     background-color:honeydew;
 }
+#tecc{
+    text-align:center;
+    background-color:honeydew;
+}
 /* to make the input box of appropiate size */
 input{
     width: 70%;
@@ -21,7 +25,8 @@ input{
 
 /* for making radio button hidden  */
 #bv_min_id,#bv_max_id,#eps_min_id,#eps_max_id,#mc_min_id,#mc_max_id,#por_min_id,#por_max_id,#pb_min_id,#pb_max_id,
-#pe_min_id,#pe_max_id,#pgr_min_id,#pgr_max_id,#roa_min_id,#roa_max_id,#roe_min_id,#roe_max_id{
+#pe_min_id,#pe_max_id,#pgr_min_id,#pgr_max_id,#roa_min_id,#roa_max_id,#roe_min_id,#roe_max_id
+,#rsi_min_id,#rsi_max_id,#macd_min_id,#macd_max_id,#bbs_min_id,#bbs_max_id{
     visibility: hidden;
 }
 
@@ -33,7 +38,3 @@ input{
 /* #ff_search{
     background-color:darkgreen;
 } */
-
-#comparator_container{
-    text-align: center;
-}
