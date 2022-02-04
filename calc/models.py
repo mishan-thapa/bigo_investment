@@ -53,3 +53,35 @@ class technical1(models.Model):
 
     def __str__(self):
       return self.companies
+
+class technical2(models.Model):
+    sn=models.IntegerField()
+    business_date = models.DateField()
+    security_id = models.IntegerField()
+    symbol = models.TextField()
+    security_name = models.TextField()
+    open_price = models.FloatField(max_length=20)
+    high_price = models.FloatField(max_length=20)
+    low_price = models.FloatField(max_length=20)
+    close_price = models.FloatField(max_length=20)
+    total_traded_quantity=models.IntegerField()
+    total_traded_value = models.FloatField(max_length=20)
+    previous_day_close_price = models.FloatField(max_length=20)
+    fiftytwo_week_high_price = models.FloatField(max_length=20)
+    fiftytwo_week_low_price = models.FloatField(max_length=20)
+    last_updated_time= models.DateTimeField()
+    last_updated_price = models.FloatField(max_length=20)
+    total_trades=models.IntegerField()
+    average_traded_price = models.FloatField(max_length=20)
+    market_capitalization = models.FloatField(max_length=20)
+    rsi = models.FloatField(max_length=20)
+    macd = models.TextField()
+    t50_v_20_ema = models.TextField()
+    t20sma_v_price = models.TextField()
+    t50sma_v_price = models.TextField()
+    t200sma_v_price = models.TextField()
+    ltp=models.IntegerField()
+    bollingerband = models.TextField()
+
+    def __str__(self):
+      return self.symbol

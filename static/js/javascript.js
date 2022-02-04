@@ -102,6 +102,16 @@ function funda_radio(x){
             de="rsi_defined_id";
             mn="rsi_min_id";
             mx="rsi_max_id";
+            break;
+        case 21:
+            de="ltp_defined_id";
+            mn="ltp_min_id";
+            mx="ltp_max_id";
+            break;
+        case 22:
+            de="ltp_defined_id";
+            mn="ltp_min_id";
+            mx="ltp_max_id";
             break;}
     if(x%2==0){
         document.getElementById(mx).style.visibility="visible";

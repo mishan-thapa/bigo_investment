@@ -4,6 +4,7 @@ from django.contrib import admin
 #from calc.models import TSLA
 from calc.models import fundamental
 from calc.models import technical1
+from calc.models import technical2
 from calc.models import a
 #from calc.models import fundamental1
 
@@ -13,6 +14,7 @@ from django import forms
 #from .models import TSLA
 from .models import fundamental
 from .models import technical1
+from .models import technical2
 from .models import a
 #from .models import fundamental1
 from django.contrib import messages
@@ -21,7 +23,7 @@ from django.urls import reverse
 
 # Register your models here.
 # admin.site.register(TSLA)
-
+#admin.site.register(technical2)
 
 
 
@@ -137,8 +139,12 @@ admin.site.register(fundamental, fundamentalAdmin)
 
 
 # yo chai technical ko data halna hai 
-class technical1Admin(admin.ModelAdmin):
-    list_display3 = ('companies','rsi','macd','bollingerband')
+class technical2Admin(admin.ModelAdmin):
+    list_display4 = ('sn','business_date','security_id','symbol' , 'security_name', 'open_price', 'high_price',
+     'close_price', 'total_traded_quantity', 'total_traded_value', 'previous_day_close_price', 'fiftytwo_week_high_price',
+     'fiftytwo_week_high_price', 'fiftytwo_week_low_price', 'last_updated_time', 'last_updated_price', 'total_trades', 
+     'average_traded_price', 'market_capitalization', 'rsi', 'macd', 't50_v_20_ema', 't20sma_v_price',
+      't50sma_v_price', 't200sma_v_price', 'ltp', 'bollingerband')
 
     def get_urls(self):
         urls = super().get_urls()
@@ -168,11 +174,34 @@ class technical1Admin(admin.ModelAdmin):
                 
                 
                 try:
-                    created = technical1.objects.update_or_create(
-                    companies = fields[0],
-                    rsi = fields[1],
-                    macd = fields[2],
-                    bollingerband =fields[3],
+                    created = technical2.objects.update_or_create(
+                    sn = fields[0],
+                    business_date = fields[1],
+                    security_id = fields[2],
+                    symbol =fields[3],
+                    security_name = fields[4],
+                    open_price = fields[5],
+                    high_price = fields[6],
+                    low_price = fields[7],
+                    close_price = fields[8],
+                    total_traded_quantity = fields[9],
+                    total_traded_value= fields[10],
+                    previous_day_close_price = fields[11],
+                    fiftytwo_week_high_price = fields[12],
+                    fiftytwo_week_low_price = fields[13],
+                    last_updated_time= fields[14],
+                    last_updated_price =fields[15],
+                    total_trades = fields[16],
+                    average_traded_price= fields[17],
+                    market_capitalization= fields[18],
+                    rsi= fields[19],
+                    macd = fields[20],
+                    t50_v_20_ema = fields[21],
+                    t20sma_v_price= fields[22],
+                    t50sma_v_price= fields[23],
+                    t200sma_v_price =fields[24],
+                    ltp= fields[25],
+                    bollingerband= fields[26],
                     )
                 except:
                     pass
@@ -183,7 +212,8 @@ class technical1Admin(admin.ModelAdmin):
         data = {"form": form}
         return render(request, "admin/csv_upload.html", data)
 
-admin.site.register(technical1,technical1Admin)
+admin.site.register(technical2,technical2Admin)
+admin.site.register(technical1)
 
 # for a company ko lagi hai
 class aAdmin(admin.ModelAdmin):

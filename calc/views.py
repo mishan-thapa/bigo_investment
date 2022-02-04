@@ -1,10 +1,12 @@
 from asyncio.windows_events import NULL
+from symtable import Symbol
 from django.shortcuts import render
 from django.http import HttpResponse
 #from calc.models import TSLA
 from calc.models import fundamental
 from calc.models import a
 from calc.models import technical1
+from calc.models import technical2
 import pandas as pd
 
 fs1=''
@@ -24,10 +26,12 @@ def forecast(request):
 def comparator_comp1_search(request):
     if request.method == "POST":
         fs1= request.POST.get('comparator_comp1_search_name')
-        comparator_comp1_search_query=fundamental.objects.all().filter(companies=fs1)
         fs= request.POST.get('comparator_comp2_search_name')
-        comparator_comp2_search_query=fundamental.objects.all().filter(companies=fs)   
-        return render(request,'table1.html',{'comparator_comp1_search_query':comparator_comp1_search_query,'comparator_comp2_search_query':comparator_comp2_search_query})
+        fcomparator_comp1_search_query=fundamental.objects.all().filter(companies=fs1)
+        fcomparator_comp2_search_query=fundamental.objects.all().filter(companies=fs)
+        tcomparator_comp1_search_query=technical2.objects.all().filter(symbol=fs1)
+        tcomparator_comp2_search_query=technical2.objects.all().filter(symbol=fs)   
+        return render(request,'table1.html',{'fcomparator_comp1_search_query':fcomparator_comp1_search_query,'fcomparator_comp2_search_query':fcomparator_comp2_search_query,'tcomparator_comp1_search_query':tcomparator_comp1_search_query,'tcomparator_comp2_search_query':tcomparator_comp2_search_query})
 
 
 
@@ -73,25 +77,51 @@ def technical_screener_search(request):
         rsi_def =request.POST.get('rsi_defined_search')
         macd_def =request.POST.get('macd_defined_search')
         bbs_def =request.POST.get('bbs_defined_search')
-        technical1_query= technical1.objects.all()
+        ltp_min =request.POST.get('ltp_min_search')
+        ltp_max =request.POST.get('ltp_max_search')
+        ltp_def =request.POST.get('ltp_defined_search')
+        t20v20p_def =request.POST.get('t20v20p_defined_search')
+        t50v20p_def =request.POST.get('t50v20p_defined_search')
+        t200v20p_def =request.POST.get('t200v20p_defined_search')
+        t50v20e_def =request.POST.get('t50v20e_defined_search')
+        technical2_query= technical2.objects.all()
         if macd_def !='' and macd_def is not None:
-            technical1_query= technical1_query.filter(macd= macd_def)
+            technical2_query= technical2_query.filter(macd= macd_def)
         if bbs_def !='' and bbs_def is not None:
-            technical1_query= technical1_query.filter(bollingerband = bbs_def)
+            technical2_query= technical2_query.filter(bollingerband = bbs_def)
         if rsi_min !='' and rsi_min is not None:
-            technical1_query= technical1_query.filter(rsi__gte= rsi_min)
+            technical2_query= technical2_query.filter(rsi__gte= rsi_min)
         if rsi_max !='' and rsi_max is not None:
-            technical1_query= technical1_query.filter(rsi__lte= rsi_max)
+            technical2_query= technical2_query.filter(rsi__lte= rsi_max)
         if rsi_def !='' and rsi_def is not None:
             if rsi_def == 1:
-                technical1_query= technical1_query.filter(rsi__lte= 30)
+                technical2_query= technical2_query.filter(rsi__lte= 30)
             elif rsi_def == 2 :
-                technical1_query= technical1_query.filter(rsi__lte= 70)
-                technical1_query= technical1_query.filter(rsi__gte= 30)
+                technical2_query= technical2_query.filter(rsi__lte= 70)
+                technical2_query= technical2_query.filter(rsi__gte= 30)
             else :
-                technical1_query= technical1_query.filter(rsi__gte= 70)
+                technical2_query= technical2_query.filter(rsi__gte= 70)
+        if t20v20p_def !='' and t20v20p_def is not None:
+            technical2_query= technical2_query.filter(t20sma_v_price= t20v20p_def)
+        if t50v20p_def !='' and t50v20p_def is not None:
+            technical2_query= technical2_query.filter(t50sma_v_price= t50v20p_def)
+        if t200v20p_def !='' and t200v20p_def is not None:
+            technical2_query= technical2_query.filter(t200sma_v_price= t200v20p_def)        
+        if t50v20e_def !='' and t50v20e_def is not None:
+            technical2_query= technical2_query.filter(t50_v_20_ema = t50v20e_def)
+        if ltp_min !='' and ltp_min is not None:
+            technical2_query= technical2_query.filter(ltp__gte= ltp_min)
+        if ltp_max !='' and ltp_max is not None:
+            technical2_query= technical2_query.filter(ltp__lte= ltp_max)
+        if ltp_def !='' and ltp_def is not None:
+            if ltp_def == 1:
+                technical2_query= technical2_query.filter(ltp__lte= 300)
+            elif ltp_def == 2 :
+                technical2_query= technical2_query.filter(ltp__lte= 500)
+            else :
+                technical2_query= technical2_query.filter(ltp__gte= 500)
         
-        return render(request,'technical_screener.html',{'tq':technical1_query})
+        return render(request,'technical_screener.html',{'tq':technical2_query})
 
 
 def fundamental_screener_search(request):
