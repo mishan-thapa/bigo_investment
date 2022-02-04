@@ -7,7 +7,8 @@ from calc.models import a
 from calc.models import technical1
 import pandas as pd
 
-
+fs1=''
+fs2=''
 # Create your views here.
 def home(request):
     return render(request,'home.html')
@@ -22,9 +23,13 @@ def forecast(request):
 
 def comparator_comp1_search(request):
     if request.method == "POST":
-        fs= request.POST.get('comparator_comp1_search_name')
-        comparator_comp1_search_query=fundamental.objects.all().filter(companies=fs)
-        return render(request,'comparator.html',{'comparator_comp1_search_query':comparator_comp1_search_query})
+        fs1= request.POST.get('comparator_comp1_search_name')
+        comparator_comp1_search_query=fundamental.objects.all().filter(companies=fs1)
+        fs= request.POST.get('comparator_comp2_search_name')
+        comparator_comp2_search_query=fundamental.objects.all().filter(companies=fs)   
+        return render(request,'table1.html',{'comparator_comp1_search_query':comparator_comp1_search_query,'comparator_comp2_search_query':comparator_comp2_search_query})
+
+
 
 def technical_screener(request):
     return render(request,'technical_screener.html')
@@ -42,7 +47,7 @@ def forecast_search(request):
         fs= request.POST.get('forecast_close_search')
         print(fs)
         fsq= a.objects.all() 
-        return render(request,'forecast.html',{'fsq':fsq})
+        return render(request,'forecast.html',{'fsq':fsq ,'forecast_query' : forecast_query})
         
         
         

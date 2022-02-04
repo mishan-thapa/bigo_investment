@@ -30,8 +30,9 @@ urlpatterns = [
     path('forecast.html', views.forecast,name='forecast'),
     path('forecast_search', views.forecast_search,name='forecast_search'),
     path('comparator_comp1_search', views.comparator_comp1_search,name='comparator_comp1_search'),
-    path('comparator_comp1_search', views.comparator_comp1_search,name='comparator_comp1_search'),
     path('technical_screener_search', views.technical_screener_search,name='technical_screener_search'),
+
+    path('table1.html', views.comparator_comp1_search,name='table1'),
     
 
 
